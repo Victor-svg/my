@@ -19,7 +19,7 @@
       <div class="navbar-collapse collapse" id="navbarColor01"      style="">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{ path('blog') }}">Home
+            <a class="nav-link" href="{{ path('home') }}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
@@ -33,6 +33,9 @@
           {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{{ path('blog_create') }}">Créer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('blog') }}">Gestion deu Site</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{{ path('security_logout') }}">Deconnexion</a>

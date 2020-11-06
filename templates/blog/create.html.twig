@@ -13,7 +13,7 @@
     {{ form_start(formArticle) }}
 
         {{ form_row(formArticle) }}
-        <button type="submit" class="btn btn-success">
+        <button type="submit" onclick="return confirm('Valider ?')" class="btn btn-success">
             {% if editMode %}
                 Enregistrer  
             {% else %}
