@@ -10,9 +10,10 @@
         <article>
             <h2>{{ article.title }}</h2>
             <div class="content">
+            <p>{{ article.content | raw }}</p>
                 <img src="{{ article.image }}" alt="">
-                <p>{{ article.content | raw }}</p>
-                <a href="" class ="btn btn-primary"> Lien </a>
+                <a href="{{ path('blog_edit', { 'id': article.id }) }}" class ="btn btn-primary"> Modifier </a>
+                <a href="{{ path('article_delete', { 'id': article.id }) }}" onclick="return confirm('Supprimer ?')" class ="btn btn-danger"> Supprimer la section </a>
             </div>
         </article>
     {% endfor %}

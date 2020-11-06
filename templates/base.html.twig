@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
       <title>{% block title %}Welcome!{% endblock %}</title>
       <link rel="stylesheet"
-      href="https://bootswatch.com/4/sandstone/bootstrap.min.css">
+      href="https://bootswatch.com/4/sandstone/bootstrap.min.css">    
       {% block stylesheets %}{% endblock %}
   </head>
 
@@ -19,23 +19,39 @@
       <div class="navbar-collapse collapse" id="navbarColor01"      style="">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="{{ path('blog') }}">Home
+            <a class="nav-link" href="{{ path('home') }}">Home
               <span class="sr-only">(current)</span>
             </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{{ path('blog_create') }}">Créer</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
+          {% if not app.user %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('security_registration') }}">Inscription</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('security_login') }}">Connexion</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('blog_create') }}">Créer</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('blog') }}">Gestion deu Site</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ path('security_logout') }}">Deconnexion</a>
+            </li>
+              <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Gestion</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="{{ path('blog_create') }}">Créer un Article</a>
+              <a class="dropdown-item" href="#">Modifier un Article</a>
               <a class="dropdown-item" href="#">Something else here</a>
-            <div class="dropdown-divider"></div>
+              <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Separated link</a>
             </div>
           </li>
+          {% endif %}
+        
         </ul>
       </div>
     </nav>

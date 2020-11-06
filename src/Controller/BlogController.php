@@ -2,15 +2,15 @@
 
 namespace App\Controller;
 
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
+use App\Entity\Article;
+use App\Form\ArticleType;
+use App\Repository\ArticleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 
-use App\Entity\Article;
-use App\Repository\ArticleRepository;
-use App\Form\ArticleType;
-
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BlogController extends AbstractController
 {
@@ -61,6 +61,18 @@ class BlogController extends AbstractController
             'formArticle' => $form->createView(),
             'editMode' => $article->getId() !== null
         ]);
+    }
+    /**
+     *@Route("/blog/{id}/delete", name="article_delete")
+     *
+     */
+    public function delete(Article $article) {
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($article);
+        $em->flush();
+        $this->addFlash('success', 'Article Created! Knowledge is power!');
+        return $this->redirectToRoute('blog');
+        
     }
     
 }
