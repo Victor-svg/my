@@ -11,12 +11,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class BlogController extends AbstractController
 {
 
     /**
      * @Route("/blog", name="blog")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function index(ArticleRepository $repo)
     {
@@ -38,6 +40,7 @@ class BlogController extends AbstractController
     /**
      * @Route("/blog/new", name="blog_create")
      * @Route("/blog/{id}/edit", name="blog_edit")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function form(Article $article = null, Request $request, EntityManagerInterface $manager) {
         
@@ -64,7 +67,7 @@ class BlogController extends AbstractController
     }
     /**
      *@Route("/blog/{id}/delete", name="article_delete")
-     *
+     *@IsGranted("ROLE_ADMIN")
      */
     public function delete(Article $article) {
         $em = $this->getDoctrine()->getManager();
