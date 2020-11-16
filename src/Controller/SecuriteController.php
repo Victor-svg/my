@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 use App\Entity\User;
 use App\Form\RegistrationType;
@@ -16,6 +17,7 @@ class SecuriteController extends AbstractController
 {
     /**
      * @Route("/inscription", name="security_registration")
+     * @IsGranted("ROLE_ADMIN")
      */
     public function registration(Request $request, EntityManagerInterface $manager, UserPasswordEncoderInterface $encoder) {
         $user = new User();
